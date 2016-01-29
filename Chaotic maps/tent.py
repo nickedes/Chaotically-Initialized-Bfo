@@ -1,5 +1,5 @@
-def tent(x):
-	if x < 0.7:
-		return x/0.7
-	elif x >= 0.7:
-		return 10*(1-x)/3
+def tent(x, a=0.7):
+    if x < a:
+        return x/a
+    elif x >= a:
+        return (1-x)/(1-a)
