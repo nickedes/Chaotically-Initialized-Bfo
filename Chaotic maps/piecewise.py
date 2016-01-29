@@ -1,6 +1,4 @@
-def piecewise(x):
-    # define p
-    p = 0.4
+def piecewise(x, p=0.4):
     if 0 <= x < p:
         return x/p
     elif p <= x < 0.5:
