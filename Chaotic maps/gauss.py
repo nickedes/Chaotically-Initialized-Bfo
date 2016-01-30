@@ -6,3 +6,6 @@ def gauss(x):
         return 0
     elif 0 < x < 1:
         return 1/x - f(1/x)
+    else:
+        print(x)
+        raise ValueError
