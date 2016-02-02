@@ -10,3 +10,6 @@ def piecewise(x, p=0.4):
     else:
         print(x)
         raise ValueError
+
+# check!
+print(piecewise(0.5))
