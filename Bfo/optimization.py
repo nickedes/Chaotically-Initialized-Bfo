@@ -6,10 +6,10 @@ def optimization():
     for l in range(N_ed):
         for k in range(N_re):
             for j in range(N_ch):
-                # chemotaxis()
+                chemotaxis()
                 printf("best = %s, fe_count = %s", best, fe_count)
-            # reproduction()
-        # elimination_dispersal()
+            reproduction()
+        elimination_dispersal()
     print(
         "best found value: %s, number of function evaluations: %s", best,
         fe_count)
@@ -48,24 +48,6 @@ def chemotaxis():
             else:
                 break
 
-"""
-void reproduction()
-{
-    /* sort the population in order of increasing health value */
-    qsort(population, S, sizeof(Cell), (int(*)(const void*,const void*))compare);
-    int i, j;
-    /* Sr healthiest bacteria split into two bacteria, which are placed at the same location */
-    for(i = S-Sr, j = 0; j < Sr; i++, j++)
-    {
-        population[i] = population[j];
-    }
-    for(i = 0; i < S; i++)
-    {
-        population[i].health = 0.0;
-    }
-}
-"""
-
 
 def gethealth(bact):
     return bact.health
@@ -84,3 +66,30 @@ def reproduction():
 
     for i in range(Sr, S):
         population[i].health = 0.0
+
+
+def elimination_dispersal():
+    """
+    # Elimination and dispersal event.
+    """
+    for i in range(S):
+        # simply disperse bacterium to a random location on the search space
+        if randint(0.0, 1.0) < p_ed:
+            for j in range(dimension):
+                population[i].vect[j] = randint(space[j][0], space[j][1])
+            objective_function(population[i])
+
+
+def objective_function(x):
+
+    rez = 0.0
+    fe_count += 1
+
+    # Sphere Function
+    for i in range(dimension):
+        rez += pow(x.vect[i], 2.0)
+
+    x.cost = rez
+
+    if x.cost < best:
+        best = x.cost
