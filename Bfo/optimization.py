@@ -1,5 +1,6 @@
 """Runs the algorithm for the three main steps."""
 from init import *
+from math import *
 
 
 def optimization():
@@ -93,3 +94,47 @@ def objective_function(x):
 
     if x.cost < best:
         best = x.cost
+
+
+def interaction(x):
+    attract, repel, diff = 0.0, 0.0, 0.0
+    for i in range(S):
+        diff = 0.0
+        for j in range(dimension):
+            diff += pow(x.vect[j] - population[i].vect[j], 2.0)
+
+        attract += -1.0*d_attr*exp(-1.0*w_attr*diff)
+        repel += h_rep*exp(-1.0*w_rep*diff)
+
+    # this produces the swarming effect
+    x.fitness = x.cost + attract + repel
+
+
+def tumble_step(new_cell, current_cell):
+    a, b, temp1, temp2 = -1.0, 1.0, 0.0, 0.0
+    for i in range(dimension):
+        delta[i] = randint(a, b)
+        temp1 += pow(delta[i], 2.0)
+
+    temp2 = sqrt(temp1)
+    for i in range(dimension):
+        rand_vect[i] = delta[i]/temp2
+        new_cell.vect[i] = current_cell.vect[
+            i] + current_cell.step_size*rand_vect[i]
+        # There is no need to perform search outside of the given bounds.
+        if new_cell.vect[i] < space[i][0]:
+            new_cell.vect[i] = space[i][0]
+        if new_cell.vect[i] > space[i][1]:
+            new_cell.vect[i] = space[i][1]
+
+
+def swim_step(new_cell, current_cell):
+
+    for i in range(dimension):
+        new_cell.vect[i] = new_cell.vect[
+            i] + current_cell.step_size*rand_vect[i]
+        # there is no need to perform search outside of the given bounds
+        if new_cell.vect[i] < space[i][0]:
+            new_cell.vect[i] = space[i][0]
+        if new_cell.vect[i] > space[i][1]:
+            new_cell.vect[i] = space[i][1]
