@@ -2,6 +2,19 @@
 from init import *
 
 
+def optimization():
+    for l in range(N_ed):
+        for k in range(N_re):
+            for j in range(N_ch):
+                # chemotaxis()
+                printf("best = %s, fe_count = %s", best, fe_count)
+            # reproduction()
+        # elimination_dispersal()
+    print(
+        "best found value: %s, number of function evaluations: %s", best,
+        fe_count)
+
+
 def chemotaxis():
     Jlast = 0.0
     new_cell = Cell()
@@ -35,19 +48,6 @@ def chemotaxis():
             else:
                 break
 
-
-def optimization():
-    for l in range(N_ed):
-        for k in range(N_re):
-            for j in range(N_ch):
-                # chemotaxis()
-                printf("best = %s, fe_count = %s", best, fe_count)
-            # reproduction()
-        # elimination_dispersal()
-    print(
-        "best found value: %s, number of function evaluations: %s", best,
-        fe_count)
-
 """
 void reproduction()
 {
@@ -65,3 +65,22 @@ void reproduction()
     }
 }
 """
+
+
+def gethealth(bact):
+    return bact.health
+
+
+def reproduction():
+    # sort the population in order of increasing health value
+    population = sorted(population, key=gethealth, reverse=True)
+
+    # Sr healthiest bacteria split into two bacteria, which are placed at the
+    # same location
+    i, j = S-Sr, 0
+    while j < Sr:
+        population[i] = population[j]
+        i, j = i+1, j+1
+
+    for i in range(Sr, S):
+        population[i].health = 0.0
