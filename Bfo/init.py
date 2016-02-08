@@ -24,4 +24,4 @@ class Cell:
     health = 0.0              # the health of bacterium
     step_size = 0.0           # step in the search area
 
-population = [Cell() for i in range(S)]
+population = [Cell() for i in range(S)]  # population of bacteria
