@@ -1,5 +1,5 @@
 """Initializations."""
-from math import pi
+from random import randint
 
 INF = float("inf")
 dimension = 10
@@ -42,3 +42,18 @@ def initialize_space(a, b):
     for i in range(dimension):
         space[i][0] = a
         space[i][1] = b
+
+
+def initialize_population():
+    """
+    Distribute the population within the search space.
+    """
+    for i in range(S):
+        # randomly distribute the initial population
+        for j in range(dimension):
+            population[i].vect[j] = randint(space[j][0], space[j][1])
+        # TODO : implent fitness function
+        # objective_function(population[i])
+        population[i].fitness = 0.0
+        population[i].health = 0.0
+        population[i].step_size = ss
