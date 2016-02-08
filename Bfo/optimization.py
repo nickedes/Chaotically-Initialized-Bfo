@@ -20,6 +20,7 @@ def reproduction(population):
 
     for i in range(Sr, S):
         population[i].health = 0.0
+    return population
 
 
 def objective_function(x, fe_count, best):
@@ -37,7 +38,7 @@ def objective_function(x, fe_count, best):
     return x, fe_count, best
 
 
-def elimination_dispersal():
+def elimination_dispersal(population, space, fe_count, best):
     """
     # Elimination and dispersal event.
     """
@@ -46,7 +47,10 @@ def elimination_dispersal():
         if randint(0.0, 1.0) < p_ed:
             for j in range(dimension):
                 population[i].vect[j] = randint(space[j][0], space[j][1])
-            objective_function(population[i], fe_count, best)
+            population[i], fe_count, best = objective_function(
+                population[i], fe_count, best)
+
+    return population, fe_count, best
 
 
 def interaction(x):
@@ -138,11 +142,18 @@ def optimization(population, space):
     best = INF                 # the best solution found during the search
     fe_count = 0               # number of objective function evaluations
     for l in range(N_ed):
+
         for k in range(N_re):
+
             for j in range(N_ch):
-                population, fe_count, best = chemotaxis(population, fe_count, best)
+                population, fe_count, best = chemotaxis(
+                    population, fe_count, best)
                 print("best = %d, fe_count = %d", (best, fe_count))
-            reproduction(population)
-        elimination_dispersal()
+
+            population = reproduction(population)
+
+        population, fe_count, best = elimination_dispersal(
+            population, space, fe_count, best)
+
     print("best found value: %d, number of function evaluations: %d",
           (best, fe_count))
