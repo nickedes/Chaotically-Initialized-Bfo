@@ -15,3 +15,13 @@ d_attr = 0.1     # depth of the attractant
 w_attr = 0.2     # width of the attractant signal
 h_rep = d_attr  # height of the repellant effect
 w_rep = 10.0    # width of the repellant
+
+
+class Cell:
+    vect = [0]*dimension      # position in search space
+    cost = 0.0                # objective function value
+    fitness = 0.0             # cost value and attractant and repellent effects
+    health = 0.0              # the health of bacterium
+    step_size = 0.0           # step in the search area
+
+population = [Cell() for i in range(S)]
