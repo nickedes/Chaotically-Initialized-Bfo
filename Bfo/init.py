@@ -13,7 +13,7 @@ class Cell:
     step_size = 0.0           # step in the search area
 
 S = 50      # population size
-Sr = S/2     # number to split
+Sr = S//2     # number to split
 ss = 0.6     # step size
 N_ed = 3       # number of elimination-dispersal events
 N_re = 6       # number of reproduction steps
@@ -31,20 +31,18 @@ space = [[0]*2]*dimension  # the boundaries of the search space
 rand_vect = [0]*dimension  # direction of movement after a tumble
 delta = [0]*dimension      # used in the normalization of the rand_vect
 
-best = INF                 # the best solution found during the search
-fe_count = 0               # number of objective function evaluations
 
-
-def initialize_space(a, b):
+def initialize_space(space, a, b):
     """
     set the bounds values for search space.
     """
     for i in range(dimension):
         space[i][0] = a
         space[i][1] = b
+    return space
 
 
-def initialize_population():
+def initialize_population(population, space):
     """
     Distribute the population within the search space.
     """
@@ -57,3 +55,4 @@ def initialize_population():
         population[i].fitness = 0.0
         population[i].health = 0.0
         population[i].step_size = ss
+    return population

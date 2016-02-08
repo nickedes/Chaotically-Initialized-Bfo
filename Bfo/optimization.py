@@ -3,58 +3,11 @@ from init import *
 from math import *
 
 
-def optimization():
-    for l in range(N_ed):
-        for k in range(N_re):
-            for j in range(N_ch):
-                chemotaxis()
-                printf("best = %s, fe_count = %s", best, fe_count)
-            reproduction()
-        elimination_dispersal()
-    print(
-        "best found value: %s, number of function evaluations: %s", best,
-        fe_count)
-
-
-def chemotaxis():
-    Jlast = 0.0
-    new_cell = Cell()
-    for i in range(S):
-        interaction(population[i])
-        Jlast = population[i].fitness
-        tumble_step(new_cell, population[i])  # tumble i bactu nd save new cell
-        objective_function(new_cell)
-        interaction(new_cell)
-        for j in range(dimension):
-            population[i].vect[j] = new_cell.vect[j]
-        population[i].cost = new_cell.cost
-        population[i].fitness = new_cell.fitness
-        population[i].health += population[i].fitness
-
-        for m in range(N_sl):
-            if new_cell.fitness < Jlast:
-                Jlast = new_cell.fitness
-                swim_step(new_cell, population[i])
-
-                objective_function(new_cell)
-                interaction(new_cell)
-
-                # copy
-                for j in range(dimension):
-                    population[i].vect[j] = new_cell.vect[j]
-                population[i].cost = new_cell.cost
-                population[i].fitness = new_cell.fitness
-                population[i].health += population[i].fitness
-
-            else:
-                break
-
-
 def gethealth(bact):
     return bact.health
 
 
-def reproduction():
+def reproduction(population):
     # sort the population in order of increasing health value
     population = sorted(population, key=gethealth, reverse=True)
 
@@ -69,6 +22,21 @@ def reproduction():
         population[i].health = 0.0
 
 
+def objective_function(x, fe_count, best):
+
+    rez = 0.0
+    fe_count = fe_count + 1
+    # Sphere Function
+    for i in range(dimension):
+        rez += pow(x.vect[i], 2.0)
+
+    x.cost = rez
+
+    if x.cost < best:
+        best = x.cost
+    return x, fe_count, best
+
+
 def elimination_dispersal():
     """
     # Elimination and dispersal event.
@@ -78,22 +46,7 @@ def elimination_dispersal():
         if randint(0.0, 1.0) < p_ed:
             for j in range(dimension):
                 population[i].vect[j] = randint(space[j][0], space[j][1])
-            objective_function(population[i])
-
-
-def objective_function(x):
-
-    rez = 0.0
-    fe_count += 1
-
-    # Sphere Function
-    for i in range(dimension):
-        rez += pow(x.vect[i], 2.0)
-
-    x.cost = rez
-
-    if x.cost < best:
-        best = x.cost
+            objective_function(population[i], fe_count, best)
 
 
 def interaction(x):
@@ -108,6 +61,7 @@ def interaction(x):
 
     # this produces the swarming effect
     x.fitness = x.cost + attract + repel
+    return x
 
 
 def tumble_step(new_cell, current_cell):
@@ -126,6 +80,7 @@ def tumble_step(new_cell, current_cell):
             new_cell.vect[i] = space[i][0]
         if new_cell.vect[i] > space[i][1]:
             new_cell.vect[i] = space[i][1]
+    return new_cell
 
 
 def swim_step(new_cell, current_cell):
@@ -138,3 +93,56 @@ def swim_step(new_cell, current_cell):
             new_cell.vect[i] = space[i][0]
         if new_cell.vect[i] > space[i][1]:
             new_cell.vect[i] = space[i][1]
+    return new_cell
+
+
+def chemotaxis(population, fe_count, best):
+    Jlast = 0.0
+    new_cell = Cell()
+    for i in range(S):
+        population[i] = interaction(population[i])
+        Jlast = population[i].fitness
+        new_cell = Cell()
+        # tumble i bactu nd save new cell
+        new_cell = tumble_step(new_cell, population[i])
+        new_cell, fe_count, best = objective_function(new_cell, fe_count, best)
+        new_cell = interaction(new_cell)
+        for j in range(dimension):
+            population[i].vect[j] = new_cell.vect[j]
+        population[i].cost = new_cell.cost
+        population[i].fitness = new_cell.fitness
+        population[i].health += population[i].fitness
+
+        for m in range(N_sl):
+            if new_cell.fitness < Jlast:
+                Jlast = new_cell.fitness
+                new_cell = swim_step(new_cell, population[i])
+
+                new_cell, fe_count, best = objective_function(
+                    new_cell, fe_count, best)
+                new_cell = interaction(new_cell)
+
+                # copy
+                for j in range(dimension):
+                    population[i].vect[j] = new_cell.vect[j]
+                population[i].cost = new_cell.cost
+                population[i].fitness = new_cell.fitness
+                population[i].health += population[i].fitness
+
+            else:
+                break
+    return population, fe_count, best
+
+
+def optimization(population, space):
+    best = INF                 # the best solution found during the search
+    fe_count = 0               # number of objective function evaluations
+    for l in range(N_ed):
+        for k in range(N_re):
+            for j in range(N_ch):
+                population, fe_count, best = chemotaxis(population, fe_count, best)
+                print("best = %d, fe_count = %d", (best, fe_count))
+            reproduction(population)
+        elimination_dispersal()
+    print("best found value: %d, number of function evaluations: %d",
+          (best, fe_count))

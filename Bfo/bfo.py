@@ -1,11 +1,12 @@
 from init import *
+from optimization import *
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
     print("Dimension: ", dimension)
     # search space [-100, 100]^dimension
-    # initialize_space(-100.0, 100.0)
+    space = initialize_space(space, -100.0, 100.0)
     # random initialization within the search space
-    # initialize_population()
+    population = initialize_population(population, space)
     # minimization of objective function
-    # optimization()
+    optimization(population, space)
