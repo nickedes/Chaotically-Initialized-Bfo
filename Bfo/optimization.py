@@ -23,21 +23,6 @@ def reproduction(population):
     return population
 
 
-def objective_function(x, fe_count, best):
-
-    rez = 0.0
-    fe_count = fe_count + 1
-    # Sphere Function
-    for i in range(dimension):
-        rez += pow(x.vect[i], 2.0)
-
-    x.cost = rez
-
-    if x.cost < best:
-        best = x.cost
-    return x, fe_count, best
-
-
 def elimination_dispersal(population, space, fe_count, best):
     """
     # Elimination and dispersal event.
@@ -138,9 +123,7 @@ def chemotaxis(population, fe_count, best):
     return population, fe_count, best
 
 
-def optimization(population, space):
-    best = INF                 # the best solution found during the search
-    fe_count = 0               # number of objective function evaluations
+def optimization(population, space, fe_count, best):
     for l in range(N_ed):
 
         for k in range(N_re):

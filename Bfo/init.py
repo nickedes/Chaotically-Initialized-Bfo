@@ -1,6 +1,5 @@
 """Initializations."""
 from random import randint
-
 INF = float("inf")
 dimension = 10
 
@@ -32,6 +31,21 @@ rand_vect = [0]*dimension  # direction of movement after a tumble
 delta = [0]*dimension      # used in the normalization of the rand_vect
 
 
+def objective_function(x, fe_count, best):
+
+    rez = 0.0
+    fe_count = fe_count + 1
+    # Sphere Function
+    for i in range(dimension):
+        rez += pow(x.vect[i], 2.0)
+
+    x.cost = rez
+
+    if x.cost < best:
+        best = x.cost
+    return x, fe_count, best
+
+
 def initialize_space(space, a, b):
     """
     set the bounds values for search space.
@@ -42,7 +56,7 @@ def initialize_space(space, a, b):
     return space
 
 
-def initialize_population(population, space):
+def initialize_population(population, space, fe_count, best):
     """
     Distribute the population within the search space.
     """
@@ -51,8 +65,9 @@ def initialize_population(population, space):
         for j in range(dimension):
             population[i].vect[j] = randint(space[j][0], space[j][1])
         # TODO : implent fitness function
-        # objective_function(population[i])
+        population[i], fe_count, best = objective_function(
+            population[i], fe_count, best)
         population[i].fitness = 0.0
         population[i].health = 0.0
         population[i].step_size = ss
-    return population
+    return population, fe_count, best
