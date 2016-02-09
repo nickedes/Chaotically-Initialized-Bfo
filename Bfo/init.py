@@ -1,6 +1,7 @@
 """Initializations."""
-from random import randint
-INF = float("inf")
+from random import random
+import sys
+INF = sys.maxsize
 dimension = 10
 
 
@@ -16,7 +17,7 @@ Sr = S//2     # number to split
 ss = 0.6     # step size
 N_ed = 3       # number of elimination-dispersal events
 N_re = 6       # number of reproduction steps
-N_ch = 20      # number of chemotactic steps
+N_ch = 10      # number of chemotactic steps
 N_sl = 4       # swim length
 p_ed = 0.25    # eliminate probability
 d_attr = 0.1     # depth of the attractant
@@ -29,6 +30,11 @@ population = [Cell() for i in range(S)]  # population of bacteria
 space = [[0]*2]*dimension  # the boundaries of the search space
 rand_vect = [0]*dimension  # direction of movement after a tumble
 delta = [0]*dimension      # used in the normalization of the rand_vect
+
+
+def random_val(a, b):
+    num = a + random()*(b-a)
+    return num
 
 
 def objective_function(x, fe_count, best):
@@ -63,7 +69,7 @@ def initialize_population(population, space, fe_count, best):
     for i in range(S):
         # randomly distribute the initial population
         for j in range(dimension):
-            population[i].vect[j] = randint(space[j][0], space[j][1])
+            population[i].vect[j] = random_val(space[j][0], space[j][1])
         # TODO : implent fitness function
         population[i], fe_count, best = objective_function(
             population[i], fe_count, best)

@@ -29,9 +29,9 @@ def elimination_dispersal(population, space, fe_count, best):
     """
     for i in range(S):
         # simply disperse bacterium to a random location on the search space
-        if randint(0.0, 1.0) < p_ed:
+        if random_val(0.0, 1.0) < p_ed:
             for j in range(dimension):
-                population[i].vect[j] = randint(space[j][0], space[j][1])
+                population[i].vect[j] = random_val(space[j][0], space[j][1])
             population[i], fe_count, best = objective_function(
                 population[i], fe_count, best)
 
@@ -56,7 +56,7 @@ def interaction(x):
 def tumble_step(new_cell, current_cell):
     a, b, temp1, temp2 = -1.0, 1.0, 0.0, 0.0
     for i in range(dimension):
-        delta[i] = randint(a, b)
+        delta[i] = random_val(a, b)
         temp1 += pow(delta[i], 2.0)
 
     temp2 = sqrt(temp1)
@@ -131,10 +131,10 @@ def optimization(population, space, fe_count, best):
             for j in range(N_ch):
                 population, fe_count, best = chemotaxis(
                     population, fe_count, best)
-                print("best = %d, fe_count = %d", (best, fe_count))
+                # print("best = %d, fe_count = %d", (best, fe_count))
 
             population = reproduction(population)
-
+        print("best = %d, fe_count = %d", (best, fe_count))
         population, fe_count, best = elimination_dispersal(
             population, space, fe_count, best)
 
