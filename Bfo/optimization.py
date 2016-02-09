@@ -9,7 +9,7 @@ def gethealth(bact):
 
 def reproduction(population):
     # sort the population in order of increasing health value
-    population = sorted(population, key=gethealth, reverse=True)
+    population = sorted(population, key=gethealth, reverse=False)
 
     # Sr healthiest bacteria split into two bacteria, which are placed at the
     # same location
@@ -18,7 +18,7 @@ def reproduction(population):
         population[i] = population[j]
         i, j = i+1, j+1
 
-    for i in range(Sr, S):
+    for i in range(S):
         population[i].health = 0.0
     return population
 
