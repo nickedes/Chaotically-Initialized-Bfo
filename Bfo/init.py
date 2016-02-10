@@ -2,7 +2,7 @@
 from random import random
 import sys
 INF = sys.maxsize
-dimension = 10
+dimension = 1
 
 
 class Cell:
@@ -12,14 +12,14 @@ class Cell:
     health = 0.0              # the health of bacterium
     step_size = 0.0           # step in the search area
 
-S = 100      # population size
+S = 50      # population size
 Sr = S//2     # number to split
 ss = 0.6     # step size
-N_ed = 12      # number of elimination-dispersal events
+N_ed = 10      # number of elimination-dispersal events
 N_re = 10       # number of reproduction steps
-N_ch = 15      # number of chemotactic steps
+N_ch = 100      # number of chemotactic steps
 N_sl = 4       # swim length
-p_ed = 0.25    # eliminate probability
+p_ed = 0.20    # eliminate probability
 d_attr = 0.1     # depth of the attractant
 w_attr = 0.2     # width of the attractant signal
 h_rep = d_attr  # height of the repellant effect

@@ -25,7 +25,7 @@ def reproduction(population):
 
 def elimination_dispersal(population, space, fe_count, best):
     """
-    # Elimination and dispersal event.
+    Elimination and dispersal event.
     """
     for i in range(S):
         # simply disperse bacterium to a random location on the search space
@@ -86,12 +86,13 @@ def swim_step(new_cell, current_cell):
 
 
 def chemotaxis(population, fe_count, best):
+    # TODO: Check code!
     Jlast = 0.0
     new_cell = Cell()
     for i in range(S):
         population[i] = interaction(population[i])
         Jlast = population[i].fitness
-        new_cell = Cell()
+        # new_cell = Cell()
         # tumble i bactu nd save new cell
         new_cell = tumble_step(new_cell, population[i])
         new_cell, fe_count, best = objective_function(new_cell, fe_count, best)
