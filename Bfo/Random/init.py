@@ -1,8 +1,9 @@
 """Initializations."""
 from random import random
+from fitness import objective_function
 import sys
 INF = sys.maxsize
-dimension = 10
+dimension = 2
 
 
 class Cell:
@@ -38,19 +39,19 @@ def random_val(a, b):
     return num
 
 
-def objective_function(x, fe_count, best):
+# def objective_function(x, fe_count, best):
 
-    rez = 0.0
-    fe_count = fe_count + 1
-    # Sphere Function
-    for i in range(dimension):
-        rez += pow(x.vect[i], 2.0)
+#     rez = 0.0
+#     fe_count = fe_count + 1
+#     # Sphere Function
+#     for i in range(dimension):
+#         rez += pow(x.vect[i], 2.0)
 
-    x.cost = rez
+#     x.cost = rez
 
-    if x.cost < best:
-        best = x.cost
-    return x, fe_count, best
+#     if x.cost < best:
+#         best = x.cost
+#     return x, fe_count, best
 
 
 def initialize_space(space, a, b):
@@ -73,7 +74,7 @@ def initialize_population(population, space, fe_count, best):
             population[i].vect[j] = random_val(space[j][0], space[j][1])
         # TODO : implent fitness function
         population[i], fe_count, best = objective_function(
-            population[i], fe_count, best)
+            1, population[i], fe_count, best)
         population[i].fitness = 0.0
         population[i].health = 0.0
         population[i].step_size = ss

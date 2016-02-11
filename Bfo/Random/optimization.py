@@ -33,7 +33,7 @@ def elimination_dispersal(population, space, fe_count, best):
             for j in range(dimension):
                 population[i].vect[j] = random_val(space[j][0], space[j][1])
             population[i], fe_count, best = objective_function(
-                population[i], fe_count, best)
+                1, population[i], fe_count, best)
 
     return population, fe_count, best
 
@@ -95,7 +95,7 @@ def chemotaxis(population, fe_count, best):
         # new_cell = Cell()
         # tumble i bactu nd save new cell
         new_cell = tumble_step(new_cell, population[i])
-        new_cell, fe_count, best = objective_function(new_cell, fe_count, best)
+        new_cell, fe_count, best = objective_function(1, new_cell, fe_count, best)
         new_cell = interaction(new_cell)
         for j in range(dimension):
             population[i].vect[j] = new_cell.vect[j]
@@ -109,7 +109,7 @@ def chemotaxis(population, fe_count, best):
                 new_cell = swim_step(new_cell, population[i])
 
                 new_cell, fe_count, best = objective_function(
-                    new_cell, fe_count, best)
+                    1, new_cell, fe_count, best)
                 new_cell = interaction(new_cell)
 
                 # copy
