@@ -1,4 +1,6 @@
 """Fitness Functions."""
+from math import cos, pi
+#
 
 
 def normalization(x, x_min=-5.12, x_max=5.12):
@@ -28,11 +30,30 @@ def sphere(x, fe_count, best):
     return x, fe_count, best
 
 
+def rastrigin(x, fe_count, best):
+    """
+    RASTRIGIN FUNCTION
+    Input Domain: [-5.12, 5.12]
+    """
+    # x = normalization(x)
+    result = 0
+    fe_count = fe_count + 1
+    for i in range(len(x.vect)):
+        result += x.vect[i]**2 - 10*cos(2*pi*x.vect[i]) + 10
+
+    x.cost = result
+    if x.cost < best:
+        best = x.cost
+    return x, fe_count, best
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
     """
     if num == 1:
         return sphere(x, fe_count, best)
+    elif num == 2:
+        return rastrigin(x, fe_count, best)
     else:
         pass

@@ -20,7 +20,7 @@ N_ed = 10      # number of elimination-dispersal events
 N_re = 6       # number of reproduction steps
 N_ch = 50      # number of chemotactic steps
 N_sl = 4       # swim length
-p_ed = 0.20    # eliminate probability
+p_ed = 0.22    # eliminate probability
 d_attr = 0.1     # depth of the attractant
 w_attr = 0.2     # width of the attractant signal
 h_rep = d_attr  # height of the repellant effect
@@ -64,7 +64,7 @@ def initialize_space(space, a, b):
     return space
 
 
-def initialize_population(population, space, fe_count, best):
+def initialize_population(num, population, space, fe_count, best):
     """
     Distribute the population within the search space.
     """
@@ -74,7 +74,7 @@ def initialize_population(population, space, fe_count, best):
             population[i].vect[j] = random_val(space[j][0], space[j][1])
         # TODO : implent fitness function
         population[i], fe_count, best = objective_function(
-            1, population[i], fe_count, best)
+            num, population[i], fe_count, best)
         population[i].fitness = 0.0
         population[i].health = 0.0
         population[i].step_size = ss

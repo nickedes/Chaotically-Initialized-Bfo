@@ -23,7 +23,7 @@ def reproduction(population):
     return population
 
 
-def elimination_dispersal(population, space, fe_count, best):
+def elimination_dispersal(num, population, space, fe_count, best):
     """
     Elimination and dispersal event.
     """
@@ -33,7 +33,7 @@ def elimination_dispersal(population, space, fe_count, best):
             for j in range(dimension):
                 population[i].vect[j] = random_val(space[j][0], space[j][1])
             population[i], fe_count, best = objective_function(
-                1, population[i], fe_count, best)
+                num, population[i], fe_count, best)
 
     return population, fe_count, best
 
@@ -85,7 +85,7 @@ def swim_step(new_cell, current_cell):
     return new_cell
 
 
-def chemotaxis(population, fe_count, best):
+def chemotaxis(num, population, fe_count, best):
     # TODO: Check code!
     Jlast = 0.0
     new_cell = Cell()
@@ -95,7 +95,8 @@ def chemotaxis(population, fe_count, best):
         # new_cell = Cell()
         # tumble i bactu nd save new cell
         new_cell = tumble_step(new_cell, population[i])
-        new_cell, fe_count, best = objective_function(1, new_cell, fe_count, best)
+        new_cell, fe_count, best = objective_function(
+            num, new_cell, fe_count, best)
         new_cell = interaction(new_cell)
         for j in range(dimension):
             population[i].vect[j] = new_cell.vect[j]
@@ -109,7 +110,7 @@ def chemotaxis(population, fe_count, best):
                 new_cell = swim_step(new_cell, population[i])
 
                 new_cell, fe_count, best = objective_function(
-                    1, new_cell, fe_count, best)
+                    num, new_cell, fe_count, best)
                 new_cell = interaction(new_cell)
 
                 # copy
@@ -124,20 +125,20 @@ def chemotaxis(population, fe_count, best):
     return population, fe_count, best
 
 
-def optimization(population, space, fe_count, best):
+def optimization(num, population, space, fe_count, best):
     for l in range(N_ed):
 
         for k in range(N_re):
 
             for j in range(N_ch):
                 population, fe_count, best = chemotaxis(
-                    population, fe_count, best)
+                    num, population, fe_count, best)
                 # print("best = %d, fe_count = %d", (best, fe_count))
 
             population = reproduction(population)
-        print("best = %d, fe_count = %d", (best, fe_count))
+        print("best = ", best, " fe_count = ", fe_count)
         population, fe_count, best = elimination_dispersal(
-            population, space, fe_count, best)
+            num, population, space, fe_count, best)
 
-    print("best found value: %d, number of function evaluations: %d",
-          (best, fe_count))
+    print("best found value: ", best, " number of function evaluations: ",
+          fe_count, " For Fitness function ", num)
