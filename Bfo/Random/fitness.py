@@ -47,6 +47,24 @@ def rastrigin(x, fe_count, best):
     return x, fe_count, best
 
 
+def rosenbrock(x, fe_count, best):
+    """
+    ROSENBROCK FUNCTION
+    Input Domain: [-2.048, 2.048]
+    """
+    # x_min, x_max = -2.048, 2.048
+    # x = normalization(x, x_min, x_max)
+    result = 0
+    fe_count = fe_count + 1
+    for i in range(len(x.vect)-1):
+        result += 100*(x.vect[i+1]-x.vect[i]**2)**2 + (x.vect[i] - 1)**2
+
+    x.cost = result
+    if x.cost < best:
+        best = x.cost
+    return x, fe_count, best
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
@@ -55,5 +73,7 @@ def objective_function(num, x, fe_count, best):
         return sphere(x, fe_count, best)
     elif num == 2:
         return rastrigin(x, fe_count, best)
+    elif num == 3:
+        return rosenbrock(x, fe_count, best)
     else:
         pass
