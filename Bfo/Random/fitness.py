@@ -1,6 +1,5 @@
 """Fitness Functions."""
-from math import cos, pi
-#
+from math import *
 
 
 def normalization(x, x_min=-5.12, x_max=5.12):
@@ -65,6 +64,23 @@ def rosenbrock(x, fe_count, best):
     return x, fe_count, best
 
 
+def schwefel(x, fe_count, best):
+    """
+    SCHWEFEL FUNCTION
+    Input Domain: [-65.536, 64.536]
+    """
+    # x = normalization(x, x_min, x_max)
+    result = 0
+    fe_count = fe_count + 1
+    for i in range(len(x.vect)-1):
+        result += (-1*x.vect[i])*sin(sqrt(abs(x.vect[i])))
+
+    x.cost = result
+    if abs(x.cost) < abs(best):
+        best = abs(x.cost)
+    return x, fe_count, best
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
@@ -75,5 +91,7 @@ def objective_function(num, x, fe_count, best):
         return rastrigin(x, fe_count, best)
     elif num == 3:
         return rosenbrock(x, fe_count, best)
+    elif num == 4:
+        return schwefel(x, fe_count, best)
     else:
         pass
