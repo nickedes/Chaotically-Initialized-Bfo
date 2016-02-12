@@ -1,7 +1,7 @@
 from init import *
 from optimization import *
 
-num = 4  # number of fitness functions
+num = 5  # number of fitness functions
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")

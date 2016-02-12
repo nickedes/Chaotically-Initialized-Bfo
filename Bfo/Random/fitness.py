@@ -81,6 +81,24 @@ def schwefel(x, fe_count, best):
     return x, fe_count, best
 
 
+def quartic(x, fe_count, best):
+    """
+    QUARTIC FUNCTION
+    Input Domain: [-1.28, 1.28]
+    """
+    x = normalization(x, -1.28, 1.28)
+    result = 0
+    fe_count = fe_count + 1
+    for i in range(1, len(x.vect)-1):
+        result += (i+1)*pow(x.vect[i], 4)
+    result += x.vect[0]
+
+    x.cost = result
+    if abs(x.cost) < abs(best):
+        best = abs(x.cost)
+    return x, fe_count, best
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
@@ -93,5 +111,7 @@ def objective_function(num, x, fe_count, best):
         return rosenbrock(x, fe_count, best)
     elif num == 4:
         return schwefel(x, fe_count, best)
+    elif num == 5:
+        return quartic(x, fe_count, best)
     else:
         pass
