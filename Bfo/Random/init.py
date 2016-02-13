@@ -1,5 +1,5 @@
 """Initializations."""
-from random import random
+# from random import random
 from fitness import objective_function
 import sys
 INF = sys.maxsize
@@ -34,18 +34,18 @@ delta = [0]*dimension      # used in the normalization of the rand_vect
 
 # chaotic initializations
 c_space = 0.7   # chaotic init for space
-c_prob = 0.4    # chaotic init for probability
+c_prob = 0.6    # chaotic init for probability
 
-# Logistic map
+
 def logistic(x, a=0.4):
     x = a*x*(1-x)
     return x
 
 
-def random_val(a, b):
-    num = random()
-    num = a + num*(b-a)
-    return num
+# def random_val(a, b):
+#     num = random()
+#     num = a + num*(b-a)
+#     return num
 
 
 # def objective_function(x, fe_count, best):

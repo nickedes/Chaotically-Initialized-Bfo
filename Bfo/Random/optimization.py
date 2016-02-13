@@ -56,9 +56,10 @@ def interaction(x):
 
 
 def tumble_step(new_cell, current_cell):
-    a, b, temp1, temp2 = -1.0, 1.0, 0.0, 0.0
+    c_tumble, temp1, temp2 = 0.3, 0.0, 0.0
     for i in range(dimension):
-        delta[i] = random_val(a, b)
+        c_tumble = logistic(c_tumble)
+        delta[i] = c_tumble
         temp1 += pow(delta[i], 2.0)
 
     temp2 = sqrt(temp1)
