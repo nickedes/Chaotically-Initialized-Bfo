@@ -100,6 +100,7 @@ def quartic(x, fe_count, best):
 
 
 def ackley(x, fe_count, best):
+    # x = normalization(x, -50, 50)
     fe_count = fe_count + 1
     sum_sq = 0.0
     sum_cos = 0.0
@@ -112,6 +113,16 @@ def ackley(x, fe_count, best):
     if abs(x.cost) < abs(best):
         best = abs(x.cost)
     return x, fe_count, bestxp
+
+
+def f5(x, fe_count, best):
+    result = 0.0
+    for i in range(len(x.vect)):
+        result += abs(x.vect[i]) - 10*cos(sqrt(abs(10*x.vect[i])))
+    x.cost = result
+    if abs(x.cost) < abs(best):
+        best = abs(x.cost)
+    return x, fe_count, best
 
 
 def objective_function(num, x, fe_count, best):
@@ -130,5 +141,7 @@ def objective_function(num, x, fe_count, best):
         return quartic(x, fe_count, best)
     elif num == 6:
         return ackley(x, fe_count, best)
+    elif num == 7:
+        return f5(x, fe_count, best)
     else:
         pass
