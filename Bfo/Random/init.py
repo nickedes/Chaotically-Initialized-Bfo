@@ -13,7 +13,7 @@ class Cell:
     health = 0.0              # the health of bacterium
     step_size = 0.0           # step in the search area
 
-S = 30      # population size
+S = 20      # population size
 Sr = S//2     # number to split
 ss = 0.6     # step size
 N_ed = 100      # number of elimination-dispersal events

@@ -99,6 +99,21 @@ def quartic(x, fe_count, best):
     return x, fe_count, best
 
 
+def ackley(x, fe_count, best):
+    fe_count = fe_count + 1
+    sum_sq = 0.0
+    sum_cos = 0.0
+    for i in range(len(x.vect)):
+        sum_sq += pow(x.vect[i], 2)
+        sum_cos += cos(2*pi*x.vect[i])
+    sum_sq = (-0.2)*sqrt(sum_sq/len(x.vect))
+    sum_cos = sum_cos/len(x.vect)
+    x.cost = (-20)*exp(sum_sq) - exp(sum_cos) + 20 + e
+    if abs(x.cost) < abs(best):
+        best = abs(x.cost)
+    return x, fe_count, bestxp
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
@@ -113,5 +128,7 @@ def objective_function(num, x, fe_count, best):
         return schwefel(x, fe_count, best)
     elif num == 5:
         return quartic(x, fe_count, best)
+    elif num == 6:
+        return ackley(x, fe_count, best)
     else:
         pass
