@@ -125,6 +125,21 @@ def f5(x, fe_count, best):
     return x, fe_count, best
 
 
+def griewank(x, fe_count, best):
+    result = 0.0
+    sum_sq = 0.0
+    prod_cos = 1
+    fe_count = fe_count + 1
+    for i in range(len(x.vect)):
+        sum_sq += pow(x.vect[i], 2.0)
+        prod_cos *= cos(x.vect[i]/sqrt(i))
+    result = sum_sq/4000 - prod_cos + 1
+    x.cost = result
+    if abs(x.cost) < abs(best):
+        best = abs(x.cost)
+    return x, fe_count, best
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
@@ -143,5 +158,7 @@ def objective_function(num, x, fe_count, best):
         return ackley(x, fe_count, best)
     elif num == 7:
         return f5(x, fe_count, best)
+    elif num == 8:
+        return griewank(x, fe_count, best)
     else:
         pass
