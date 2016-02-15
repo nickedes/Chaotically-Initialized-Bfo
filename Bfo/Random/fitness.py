@@ -112,7 +112,7 @@ def ackley(x, fe_count, best):
     x.cost = (-20)*exp(sum_sq) - exp(sum_cos) + 20 + e
     if abs(x.cost) < abs(best):
         best = abs(x.cost)
-    return x, fe_count, bestxp
+    return x, fe_count, best
 
 
 def f5(x, fe_count, best):
@@ -127,12 +127,12 @@ def f5(x, fe_count, best):
 
 def griewank(x, fe_count, best):
     result = 0.0
-    sum_sq = 0.0
-    prod_cos = 1
+    sum_sq = pow(x.vect[0], 2.0)
+    prod_cos = cos(x.vect[0])
     fe_count = fe_count + 1
-    for i in range(len(x.vect)):
+    for i in range(1, len(x.vect)):
         sum_sq += pow(x.vect[i], 2.0)
-        prod_cos *= cos(x.vect[i]/sqrt(i))
+        prod_cos *= cos(x.vect[i]/sqrt(i+1))
     result = sum_sq/4000 - prod_cos + 1
     x.cost = result
     if abs(x.cost) < abs(best):
