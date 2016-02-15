@@ -1,5 +1,5 @@
 """Initializations."""
-from random import random
+# from random import random
 from fitness import objective_function
 import sys
 INF = sys.maxsize
@@ -17,8 +17,8 @@ S = 30      # population size
 Sr = S//2     # number to split
 ss = 0.6     # step size
 N_ed = 10      # number of elimination-dispersal events
-N_re = 4       # number of reproduction steps
-N_ch = 20      # number of chemotactic steps
+N_re = 10       # number of reproduction steps
+N_ch = 15      # number of chemotactic steps
 N_sl = 2       # swim length
 p_ed = 0.20    # eliminate probability
 d_attr = 0.1     # depth of the attractant
@@ -32,11 +32,22 @@ space = [[0]*2]*dimension  # the boundaries of the search space
 rand_vect = [0]*dimension  # direction of movement after a tumble
 delta = [0]*dimension      # used in the normalization of the rand_vect
 
+# chaotic initializations
+c_space = 0.1   # chaotic init for space
+c_prob = 0.1    # chaotic init for probability
 
-def random_val(a, b):
-    num = random()
-    num = a + num*(b-a)
-    return num
+
+def tent(x, a=0.7):
+    if x < a:
+        x = x/a
+    elif x >= a:
+        x = (1-x)/(1-a)
+    return x
+
+# def random_val(a, b):
+#     num = random()
+#     num = a + num*(b-a)
+#     return num
 
 
 # def objective_function(x, fe_count, best):
@@ -61,21 +72,22 @@ def initialize_space(space, a, b):
     for i in range(dimension):
         space[i][0] = a
         space[i][1] = b
-    return space
+    return c_space, c_prob, space
 
 
-def initialize_population(num, population, space, fe_count, best):
+def initialize_population(num, population, c_space, fe_count, best):
     """
     Distribute the population within the search space.
     """
     for i in range(S):
         # randomly distribute the initial population
         for j in range(dimension):
-            population[i].vect[j] = random_val(space[j][0], space[j][1])
+            c_space = tent(c_space)
+            population[i].vect[j] = c_space
         # TODO : implent fitness function
         population[i], fe_count, best = objective_function(
             num, population[i], fe_count, best)
         population[i].fitness = 0.0
         population[i].health = 0.0
         population[i].step_size = ss
-    return population, fe_count, best
+    return population, c_space, fe_count, best
