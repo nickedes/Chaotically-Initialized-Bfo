@@ -16,9 +16,9 @@ class Cell:
 S = 20      # population size
 Sr = S//2     # number to split
 ss = 0.6     # step size
-N_ed = 4      # number of elimination-dispersal events
+N_ed = 12      # number of elimination-dispersal events
 N_re = 10       # number of reproduction steps
-N_ch = 20      # number of chemotactic steps
+N_ch = 10      # number of chemotactic steps
 N_sl = 2       # swim length
 p_ed = 0.20    # eliminate probability
 d_attr = 0.1     # depth of the attractant
