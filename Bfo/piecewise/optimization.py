@@ -23,19 +23,21 @@ def reproduction(population):
     return population
 
 
-def elimination_dispersal(num, population, space, fe_count, best):
+def elimination_dispersal(num, population, c_space, fe_count, best, c_prob):
     """
     Elimination and dispersal event.
     """
     for i in range(S):
         # simply disperse bacterium to a random location on the search space
-        if random_val(0.0, 1.0) < p_ed:
+        c_prob = piecewise(c_prob)
+        if c_prob < p_ed:
             for j in range(dimension):
-                population[i].vect[j] = random_val(space[j][0], space[j][1])
+                c_space = piecewise(c_space)
+                population[i].vect[j] = c_space
             population[i], fe_count, best = objective_function(
                 num, population[i], fe_count, best)
 
-    return population, fe_count, best
+    return population, c_space, fe_count, best, c_prob
 
 
 def interaction(x):
@@ -54,9 +56,10 @@ def interaction(x):
 
 
 def tumble_step(new_cell, current_cell):
-    a, b, temp1, temp2 = -1.0, 1.0, 0.0, 0.0
+    c_tumble, temp1, temp2 = 0.3, 0.0, 0.0
     for i in range(dimension):
-        delta[i] = random_val(a, b)
+        c_tumble = piecewise(c_tumble)
+        delta[i] = c_tumble
         temp1 += pow(delta[i], 2.0)
 
     temp2 = sqrt(temp1)
@@ -125,7 +128,7 @@ def chemotaxis(num, population, fe_count, best):
     return population, fe_count, best
 
 
-def optimization(num, population, space, fe_count, best):
+def optimization(num, population, c_space, fe_count, best, c_prob):
     for l in range(N_ed):
 
         for k in range(N_re):
@@ -137,8 +140,8 @@ def optimization(num, population, space, fe_count, best):
 
             population = reproduction(population)
         print("best = ", best, " fe_count = ", fe_count)
-        population, fe_count, best = elimination_dispersal(
-            num, population, space, fe_count, best)
+        population, c_space, fe_count, best, c_prob = elimination_dispersal(
+            num, population, c_space, fe_count, best, c_prob)
 
     print("best found value: ", best, " number of function evaluations: ",
           fe_count, " For Fitness function ", num)
