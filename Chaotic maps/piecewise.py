@@ -12,4 +12,8 @@ def piecewise(x, p=0.4):
         raise ValueError
 
 # check!
-print(piecewise(0.5))
+x = 0.3
+for num in range(100):
+    x = piecewise(x)
+    print(x)
+
