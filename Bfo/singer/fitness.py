@@ -69,7 +69,7 @@ def schwefel(x, fe_count, best):
     SCHWEFEL FUNCTION
     Input Domain: [-65.536, 64.536]
     """
-    # x = normalization(x, x_min, x_max)
+    # x = normalization(x, -65.536, 64.536)
     result = 0
     fe_count = fe_count + 1
     for i in range(len(x.vect)-1):
@@ -86,7 +86,7 @@ def quartic(x, fe_count, best):
     QUARTIC FUNCTION
     Input Domain: [-1.28, 1.28]
     """
-    x = normalization(x, -1.28, 1.28)
+    # x = normalization(x, -1.28, 1.28)
     result = 0
     fe_count = fe_count + 1
     for i in range(1, len(x.vect)-1):
@@ -100,7 +100,7 @@ def quartic(x, fe_count, best):
 
 
 def ackley(x, fe_count, best):
-    # x = normalization(x, -50, 50)
+    x = normalization(x, -50, 50)
     fe_count = fe_count + 1
     sum_sq = 0.0
     sum_cos = 0.0
