@@ -11,9 +11,8 @@ def piecewise(x, p=0.4):
         print(x)
         raise ValueError
 
-# check!
-x = 0.3
+# check! [0.3, 0.7, 0.8, 0.9]
+x = 0.13
 for num in range(100):
     x = piecewise(x)
     print(x)
-
