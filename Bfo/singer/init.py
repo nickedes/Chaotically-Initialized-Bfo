@@ -3,7 +3,7 @@
 from fitness import objective_function
 import sys
 INF = sys.maxsize
-dimension = 2
+dimension = 4
 
 
 class Cell:
@@ -13,13 +13,13 @@ class Cell:
     health = 0.0              # the health of bacterium
     step_size = 0.0           # step in the search area
 
-S = 30      # population size
+S = 10      # population size
 Sr = S//2     # number to split
 ss = 0.6     # step size
-N_ed = 10      # number of elimination-dispersal events
+N_ed = 20      # number of elimination-dispersal events
 N_re = 10       # number of reproduction steps
-N_ch = 15      # number of chemotactic steps
-N_sl = 2       # swim length
+N_ch = 20      # number of chemotactic steps
+N_sl = 4       # swim length
 p_ed = 0.20    # eliminate probability
 d_attr = 0.1     # depth of the attractant
 w_attr = 0.2     # width of the attractant signal
@@ -34,13 +34,13 @@ delta = [0]*dimension      # used in the normalization of the rand_vect
 
 # chaotic initializations
 c_space = 0.1   # chaotic init for space
-c_prob = 0.1    # chaotic init for probability
+c_prob = 0.5    # chaotic init for probability
 
 
 def singer(x, u=1.07):
     if 0 < x < 1:
-        y = u*(7.86*x - 23.31*x**2 + 28.75*x**3 - 13.302875*x**4)
-        return y
+        x = u*(7.86*x - 23.31*x**2 + 28.75*x**3 - 13.302875*x**4)
+        return x
 
 # def random_val(a, b):
 #     num = random()

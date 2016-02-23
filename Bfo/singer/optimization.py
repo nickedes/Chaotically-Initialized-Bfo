@@ -139,7 +139,7 @@ def optimization(num, population, c_space, fe_count, best, c_prob):
                 # print("best = %d, fe_count = %d", (best, fe_count))
 
             population = reproduction(population)
-        print("best = ", best, " fe_count = ", fe_count)
+        # print("best = ", best, " fe_count = ", fe_count)
         population, c_space, fe_count, best, c_prob = elimination_dispersal(
             num, population, c_space, fe_count, best, c_prob)
 
