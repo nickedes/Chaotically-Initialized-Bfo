@@ -6,4 +6,7 @@ def singer(x, u=1.07):
         print(x)
         raise ValueError
 
-print(singer(0.9))
+x = 0.09
+for num in range(100):
+    x = singer(x)
+    print(x)
