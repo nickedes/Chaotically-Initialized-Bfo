@@ -21,5 +21,10 @@ if __name__ == '__main__':
         # minimization of objective function
         best = optimization(i+1, population, space, fe_count, best)
         results[i+1] = best
-    with open('data.py', 'a') as f:
-        f.write(dumps(results))
+
+    for x in results:
+        if results[x] > achived[x]:
+            results[x] = achived[x]
+    if results != achived:
+        with open('data.py', 'a') as f:
+            f.write(dumps(results))
