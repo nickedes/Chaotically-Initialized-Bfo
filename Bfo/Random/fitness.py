@@ -142,6 +142,7 @@ def griewank(x, fe_count, best):
 
 def matyas(x, fe_count, best):
     """
+    https://en.wikipedia.org/wiki/Test_functions_for_optimization
     """
     sum_sq, prod_term = 0.0, 1.0
     fe_count = fe_count + 1
