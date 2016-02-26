@@ -1,11 +1,15 @@
 from init import *
 from optimization import *
+from json import dumps
+from limit import achived
 
-num = 8  # number of fitness functions
+num = 9  # number of fitness functions
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
     print("Dimension: ", dimension)
+    # For tracking global minima. ;)
+    results = {}
     for i in range(num):
         best = INF                 # the best solution found during the search
         fe_count = 0               # number of objective function evaluations
@@ -15,4 +19,7 @@ if __name__ == '__main__':
         population, fe_count, best = initialize_population(
             i+1, population, space, fe_count, best)
         # minimization of objective function
-        optimization(i+1, population, space, fe_count, best)
+        best = optimization(i+1, population, space, fe_count, best)
+        results[i+1] = best
+    with open('data.py', 'a') as f:
+        f.write(dumps(results))

@@ -142,3 +142,4 @@ def optimization(num, population, space, fe_count, best):
 
     print("best found value: ", best, " number of function evaluations: ",
           fe_count, " For Fitness function ", num)
+    return best
