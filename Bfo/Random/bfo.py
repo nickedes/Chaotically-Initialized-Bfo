@@ -28,3 +28,6 @@ if __name__ == '__main__':
     if results != achieved:
         with open('data.py', 'a') as f:
             f.write(dumps(results) + '\n')
+        with open('limit.py', 'w') as f:
+            f.write("achieved = " + dumps(results))
+            print("Updated!")
