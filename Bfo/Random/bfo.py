@@ -20,7 +20,10 @@ if __name__ == '__main__':
             i+1, population, space, fe_count, best)
         # minimization of objective function
         best = optimization(i+1, population, space, fe_count, best)
-        results[str(i+1)] = best
+        if best == 0.0:
+            results[str(i+1)] = 1.0
+        else:
+            results[str(i+1)] = best
 
     for x in results:
         if results[x] > achieved[x]:
