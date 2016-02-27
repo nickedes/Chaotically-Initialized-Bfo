@@ -34,4 +34,3 @@ if __name__ == '__main__':
         with open('limit.py', 'w') as f:
             f.write("achieved = " + dumps(results))
             print("Updated!")
-
