@@ -25,7 +25,9 @@ if __name__ == '__main__':
         else:
             results[str(i+1)] = best
 
+    print(achieved, results)
     for x in results:
+        print(results[x], achieved[x])
         if results[x] > achieved[x]:
             results[x] = achieved[x]
     if results != achieved:

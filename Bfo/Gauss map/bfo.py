@@ -19,7 +19,7 @@ if __name__ == '__main__':
         population, c_space, fe_count, best = initialize_population(
             i+1, population, c_space, fe_count, best)
         # minimization of objective function
-        optimization(i+1, population, c_space, fe_count, best, c_prob)
+        best = optimization(i+1, population, c_space, fe_count, best, c_prob)
         results[str(i+1)] = best
 
     for x in results:
