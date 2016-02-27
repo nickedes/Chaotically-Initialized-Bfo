@@ -24,7 +24,7 @@ def sphere(x, fe_count, best):
 
     x.cost = rez
 
-    if x.cost < best:
+    if x.cost < best and x.cost != 0.0:
         best = x.cost
     return x, fe_count, best
 
@@ -41,7 +41,7 @@ def rastrigin(x, fe_count, best):
         result += x.vect[i]**2 - 10*cos(2*pi*x.vect[i]) + 10
 
     x.cost = result
-    if x.cost < best:
+    if x.cost < best and x.cost != 0.0:
         best = x.cost
     return x, fe_count, best
 
@@ -59,7 +59,7 @@ def rosenbrock(x, fe_count, best):
         result += 100*(x.vect[i+1]-x.vect[i]**2)**2 + (x.vect[i] - 1)**2
 
     x.cost = result
-    if x.cost < best:
+    if x.cost < best and x.cost != 0.0:
         best = x.cost
     return x, fe_count, best
 
@@ -76,7 +76,7 @@ def schwefel(x, fe_count, best):
         result += (-1*x.vect[i])*sin(sqrt(abs(x.vect[i])))
 
     x.cost = result
-    if abs(x.cost) < abs(best):
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = abs(x.cost)
     return x, fe_count, best
 
@@ -94,7 +94,7 @@ def quartic(x, fe_count, best):
     result += x.vect[0]
 
     x.cost = result
-    if abs(x.cost) < abs(best):
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = abs(x.cost)
     return x, fe_count, best
 
@@ -110,7 +110,7 @@ def ackley(x, fe_count, best):
     sum_sq = (-0.2)*sqrt(sum_sq/len(x.vect))
     sum_cos = sum_cos/len(x.vect)
     x.cost = (-20)*exp(sum_sq) - exp(sum_cos) + 20 + e
-    if abs(x.cost) < abs(best):
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = abs(x.cost)
     return x, fe_count, best
 
@@ -120,7 +120,7 @@ def f5(x, fe_count, best):
     for i in range(len(x.vect)):
         result += abs(x.vect[i]) - 10*cos(sqrt(abs(10*x.vect[i])))
     x.cost = result
-    if abs(x.cost) < abs(best):
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = abs(x.cost)
     return x, fe_count, best
 
@@ -135,7 +135,7 @@ def griewank(x, fe_count, best):
         prod_cos *= cos(x.vect[i]/sqrt(i+1))
     result = sum_sq/4000 - prod_cos + 1
     x.cost = result
-    if abs(x.cost) < abs(best):
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = abs(x.cost)
     return x, fe_count, best
 
@@ -152,7 +152,7 @@ def matyas(x, fe_count, best):
 
     x.cost = 0.26*sum_sq - 0.48*prod_term
 
-    if x.cost < best:
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = x.cost
     return x, fe_count, best
 

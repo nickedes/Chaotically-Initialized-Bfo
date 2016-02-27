@@ -152,7 +152,7 @@ def matyas(x, fe_count, best):
 
     x.cost = 0.26*sum_sq - 0.48*prod_term
 
-    if x.cost < best and x.cost != 0.0:
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = x.cost
     return x, fe_count, best
 
