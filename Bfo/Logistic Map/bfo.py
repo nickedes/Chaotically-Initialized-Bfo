@@ -3,7 +3,7 @@ from optimization import *
 from json import dumps
 from limit import achieved
 
-num = 8  # number of fitness functions
+num = 9  # number of fitness functions
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
@@ -19,7 +19,7 @@ if __name__ == '__main__':
         population, c_space, fe_count, best = initialize_population(
             i+1, population, c_space, fe_count, best)
         # minimization of objective function
-        optimization(i+1, population, c_space, fe_count, best, c_prob)
+        best = optimization(i+1, population, c_space, fe_count, best, c_prob)
         if best == 0.0:
             results[str(i+1)] = 1.0
         else:

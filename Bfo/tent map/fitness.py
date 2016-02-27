@@ -140,6 +140,25 @@ def griewank(x, fe_count, best):
     return x, fe_count, best
 
 
+
+
+def matyas(x, fe_count, best):
+    """
+    https://en.wikipedia.org/wiki/Test_functions_for_optimization
+    """
+    sum_sq, prod_term = 0.0, 1.0
+    fe_count = fe_count + 1
+    for i in range(len(x.vect)):
+        sum_sq += pow(x.vect[i], 2.0)
+        prod_term *= x.vect[i]
+
+    x.cost = 0.26*sum_sq - 0.48*prod_term
+
+    if x.cost < best:
+        best = x.cost
+    return x, fe_count, best
+
+
 def objective_function(num, x, fe_count, best):
     """
     To use Fitness functions based on value of 'num'.
@@ -160,5 +179,7 @@ def objective_function(num, x, fe_count, best):
         return f5(x, fe_count, best)
     elif num == 8:
         return griewank(x, fe_count, best)
+    elif num == 9:
+        return matyas(x, fe_count, best)
     else:
         pass
