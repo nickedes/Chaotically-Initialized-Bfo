@@ -3,7 +3,7 @@ from optimization import *
 from json import dumps
 from limit import achieved
 
-num = 8  # number of fitness functions
+num = 9  # number of fitness functions
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
@@ -26,12 +26,11 @@ if __name__ == '__main__':
             results[str(i+1)] = best
 
     for x in results:
-        if results[x] > achieved[x]:
-            results[x] = achieved[x]
+        if x in achieved and results[x] > achieved[x]:
+                results[x] = achieved[x]
     if results != achieved:
         with open('data.py', 'a') as f:
             f.write(dumps(results) + '\n')
         with open('limit.py', 'w') as f:
             f.write("achieved = " + dumps(results))
             print("Updated!")
-
