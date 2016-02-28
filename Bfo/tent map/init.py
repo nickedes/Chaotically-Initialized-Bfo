@@ -33,8 +33,8 @@ rand_vect = [0]*dimension  # direction of movement after a tumble
 delta = [0]*dimension      # used in the normalization of the rand_vect
 
 # chaotic initializations
-c_space = 0.1   # chaotic init for space
-c_prob = 0.1    # chaotic init for probability
+c_space = 0.2   # chaotic init for space
+c_prob = 0.7    # chaotic init for probability
 
 
 def tent(x, a=0.7):

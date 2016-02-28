@@ -35,7 +35,7 @@ delta = [0]*dimension      # used in the normalization of the rand_vect
 
 # chaotic initializations
 c_space = 0.17   # chaotic init for space
-c_prob = 0.7   # chaotic init for probability
+c_prob = 0.2   # chaotic init for probability
 
 
 def gauss(x):
