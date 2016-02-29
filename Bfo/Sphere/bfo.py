@@ -9,7 +9,7 @@ if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
     print("Dimension: ", dimension)
     # For tracking global minima. ;)
-    results = {}
+    results = {'c_space': c_space, 'c_prob': c_prob, 'c_tumble': c_tumble}
     for i in range(num):
         best = INF                 # the best solution found during the search
         fe_count = 0               # number of objective function evaluations
@@ -26,14 +26,12 @@ if __name__ == '__main__':
             results[str(i+1)] = 1.0
         else:
             results[str(i+1)] = best
-        results['c_space'], results['c_prob'], results[
-            'c_tumble'] = c_space, c_prob, c_tumble
 
     for x in results:
         if x in achieved and results[x] > achieved[x]:
             results[x] = achieved[x]
     with open('data.py', 'a') as f:
-            f.write(dumps(results, sort_keys=True) + '\n')
+        f.write(dumps(results, sort_keys=True) + '\n')
     if results != achieved:
         with open('limit.py', 'w') as f:
             f.write("achieved = " + dumps(results, sort_keys=True))
