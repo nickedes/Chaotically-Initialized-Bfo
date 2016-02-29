@@ -13,7 +13,7 @@ class Cell:
     health = 0.0              # the health of bacterium
     step_size = 0.0           # step in the search area
 
-S = 30      # population size
+S = 10      # population size
 Sr = S//2     # number to split
 ss = 0.6     # step size
 N_ed = 10      # number of elimination-dispersal events
@@ -35,7 +35,7 @@ delta = [0]*dimension      # used in the normalization of the rand_vect
 # chaotic initializations
 c_space = 0.2   # chaotic init for space
 c_prob = 0.7    # chaotic init for probability
-
+c_tumble = 0.3  # chaotic init for tumble
 
 def tent(x, a=0.7):
     if x < a:
@@ -72,7 +72,7 @@ def initialize_space(space, a, b):
     for i in range(dimension):
         space[i][0] = a
         space[i][1] = b
-    return c_space, c_prob, space
+    return c_tumble ,c_space, c_prob, space
 
 
 def initialize_population(num, population, c_space, fe_count, best):
