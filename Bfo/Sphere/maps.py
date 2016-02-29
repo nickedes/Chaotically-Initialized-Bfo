@@ -1,4 +1,4 @@
-from math import floor as f
+from math import *
 
 
 def logistic(x, a=0.4):
@@ -8,9 +8,9 @@ def logistic(x, a=0.4):
 
 def gauss(x):
     if x == 0:
-        x = 0
+        x = 1
     else:
-        x = 1/x - f(1/x)
+        x = 1/x - floor(1/x)
     return x
 
 
@@ -55,12 +55,12 @@ def map_func(num, x):
     elif num == 5:
         return tent(x)
     elif num == 6:
-        return gauss(x)
+        return iterative(x)
     elif num == 7:
-        return gauss(x)
+        return sine(x)
     elif num == 8:
-        return gauss(x)
+        return circle(x)
     elif num == 9:
-        return gauss(x)
+        return sinusoidal(x)
     elif num == 10:
-        return gauss(x)
+        return chebyshev(x, iteration_num)

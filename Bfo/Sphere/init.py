@@ -74,7 +74,7 @@ def initialize_population(num, population, c_space, fe_count, best):
     for i in range(S):
         # randomly distribute the initial population
         for j in range(dimension):
-            c_space = map_func(num, c_space)
+            c_space = map_func(num, c_space, i+j+1)
             population[i].vect[j] = c_space
         # TODO : implent fitness function
         population[i], fe_count, best = sphere(population[i], fe_count, best)

@@ -29,10 +29,10 @@ def elimination_dispersal(num, population, c_space, fe_count, best, c_prob):
     """
     for i in range(S):
         # simply disperse bacterium to a random location on the search space
-        c_prob = map_func(num, c_prob)
+        c_prob = map_func(num, c_prob, i+1)
         if c_prob < p_ed:
             for j in range(dimension):
-                c_space = map_func(num, c_space)
+                c_space = map_func(num, c_space, i+j+1)
                 population[i].vect[j] = c_space
             population[i], fe_count, best = sphere(
                 population[i], fe_count, best)
@@ -58,7 +58,7 @@ def interaction(x):
 def tumble_step(num, new_cell, current_cell, c_tumble):
     temp1, temp2 = 0.0, 0.0
     for i in range(dimension):
-        c_tumble = map_func(num, c_tumble)
+        c_tumble = map_func(num, c_tumble, i+1)
         delta[i] = c_tumble
         temp1 += pow(delta[i], 2.0)
 
