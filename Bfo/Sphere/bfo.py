@@ -26,13 +26,15 @@ if __name__ == '__main__':
             results[str(i+1)] = 1.0
         else:
             results[str(i+1)] = best
+        results['c_space'], results['c_prob'], results[
+            'c_tumble'] = c_space, c_prob, c_tumble
 
     for x in results:
         if x in achieved and results[x] > achieved[x]:
             results[x] = achieved[x]
-    if results != achieved:
-        with open('data.py', 'a') as f:
+    with open('data.py', 'a') as f:
             f.write(dumps(results) + '\n')
+    if results != achieved:
         with open('limit.py', 'w') as f:
             f.write("achieved = " + dumps(results))
             print("Updated!")
