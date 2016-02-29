@@ -33,8 +33,8 @@ if __name__ == '__main__':
         if x in achieved and results[x] > achieved[x]:
             results[x] = achieved[x]
     with open('data.py', 'a') as f:
-            f.write(dumps(results) + '\n')
+            f.write(dumps(results, sort_keys=True) + '\n')
     if results != achieved:
         with open('limit.py', 'w') as f:
-            f.write("achieved = " + dumps(results))
+            f.write("achieved = " + dumps(results, sort_keys=True))
             print("Updated!")
