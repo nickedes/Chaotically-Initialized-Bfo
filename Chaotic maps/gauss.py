@@ -7,7 +7,9 @@ def gauss(x):
     else:
         return 1/x - f(1/x)
 
-x = 0.17
-for num in range(100):
-    x = gauss(x)
-    print(x)
+x = [0.3, 0.8, 0.17]
+for y in x:
+    temp = y
+    for num in range(100):
+    temp = gauss(temp)
+    print(temp)
