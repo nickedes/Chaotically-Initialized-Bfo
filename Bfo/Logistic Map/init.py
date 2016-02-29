@@ -35,7 +35,7 @@ delta = [0]*dimension      # used in the normalization of the rand_vect
 # chaotic initializations
 c_space = 0.3   # chaotic init for space
 c_prob = 0.8   # chaotic init for probability
-
+c_tumble = 0.3
 
 def logistic(x, a=0.4):
     x = a*x*(1-x)
@@ -70,7 +70,7 @@ def initialize_space(space, a, b):
     for i in range(dimension):
         space[i][0] = a
         space[i][1] = b
-    return c_space, c_prob, space
+    return c_tumble, c_space, c_prob, space
 
 
 def initialize_population(num, population, c_space, fe_count, best):

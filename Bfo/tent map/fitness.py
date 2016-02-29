@@ -117,6 +117,7 @@ def ackley(x, fe_count, best):
 
 def f5(x, fe_count, best):
     result = 0.0
+    fe_count = fe_count + 1
     for i in range(len(x.vect)):
         result += abs(x.vect[i]) - 10*cos(sqrt(abs(10*x.vect[i])))
     x.cost = result

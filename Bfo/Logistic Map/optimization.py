@@ -55,8 +55,8 @@ def interaction(x):
     return x
 
 
-def tumble_step(new_cell, current_cell):
-    c_tumble, temp1, temp2 = 0.3, 0.0, 0.0
+def tumble_step(new_cell, current_cell, c_tumble):
+    temp1, temp2 = 0.0, 0.0
     for i in range(dimension):
         c_tumble = logistic(c_tumble)
         delta[i] = c_tumble
@@ -72,7 +72,7 @@ def tumble_step(new_cell, current_cell):
             new_cell.vect[i] = space[i][0]
         if new_cell.vect[i] > space[i][1]:
             new_cell.vect[i] = space[i][1]
-    return new_cell
+    return new_cell, c_tumble
 
 
 def swim_step(new_cell, current_cell):
@@ -88,7 +88,7 @@ def swim_step(new_cell, current_cell):
     return new_cell
 
 
-def chemotaxis(num, population, fe_count, best):
+def chemotaxis(num, population, fe_count, best, c_tumble):
     # TODO: Check code!
     Jlast = 0.0
     new_cell = Cell()
@@ -97,7 +97,7 @@ def chemotaxis(num, population, fe_count, best):
         Jlast = population[i].fitness
         # new_cell = Cell()
         # tumble i bactu nd save new cell
-        new_cell = tumble_step(new_cell, population[i])
+        new_cell, c_tumble = tumble_step(new_cell, population[i], c_tumble)
         new_cell, fe_count, best = objective_function(
             num, new_cell, fe_count, best)
         new_cell = interaction(new_cell)
@@ -128,14 +128,14 @@ def chemotaxis(num, population, fe_count, best):
     return population, fe_count, best
 
 
-def optimization(num, population, c_space, fe_count, best, c_prob):
+def optimization(num, population, c_space, fe_count, best, c_prob, c_tumble):
     for l in range(N_ed):
 
         for k in range(N_re):
 
             for j in range(N_ch):
                 population, fe_count, best = chemotaxis(
-                    num, population, fe_count, best)
+                    num, population, fe_count, best, c_tumble)
                 # print("best = %d, fe_count = %d", (best, fe_count))
 
             population = reproduction(population)
