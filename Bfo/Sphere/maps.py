@@ -40,7 +40,32 @@ def tent(x, a=0.7):
     return x
 
 
-def map_func(num, x):
+def iterative(x, a=0.7):
+    x = sin(a*pi/x)
+    return x
+
+
+def sine(x, a=4):
+    x = (a/4)*sin(pi*x)
+    return x
+
+
+def circle(x, a=0.5, b=0.2):
+    y = x + b - (a/(2*pi))*sin(2*pi*x)
+    return y % 1
+
+
+def sinusoidal(x, a=2.3):
+    x = a*pow(x, 2)*sin(pi*x)
+    return x
+
+
+def chebyshev(x, iteration_num):
+    x = cos(iteration_num*acos(x))
+    return x
+
+
+def map_func(num, x, iteration_num):
     """
     To use Chaotic maps functions based on value of 'num'.
     """
