@@ -3,7 +3,7 @@ from optimization import *
 from json import dumps
 from limit import achieved
 
-num = 9  # number of fitness functions
+num = 10  # number of fitness functions
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")

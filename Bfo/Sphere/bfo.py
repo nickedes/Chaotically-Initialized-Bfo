@@ -3,7 +3,7 @@ from optimization import *
 from json import dumps
 from limit import achieved
 
-num = 1  # number of fitness functions
+num = 10  # number of Chaotic maps
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
