@@ -28,11 +28,11 @@ if __name__ == '__main__':
             results[str(i+1)] = best
 
     for x in results:
-        if x in achieved and results[x] > achieved[x]:
-            results[x] = achieved[x]
+        if x in achieved and results[x] < achieved[x]:
+            achieved[x] = results[x]
     with open('data.py', 'a') as f:
         f.write(dumps(results, sort_keys=True) + '\n')
     if results != achieved:
         with open('limit.py', 'w') as f:
             f.write("achieved = " + dumps(results, sort_keys=True))
-            print("Updated!")
+    print("Updated!")
