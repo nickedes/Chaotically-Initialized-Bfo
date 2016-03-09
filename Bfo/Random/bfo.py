@@ -1,7 +1,6 @@
 from init import *
 from optimization import *
 from json import dumps
-from limit import achieved
 
 num = 9  # number of fitness functions
 
@@ -25,12 +24,6 @@ if __name__ == '__main__':
         else:
             results[str(i+1)] = best
 
-    for x in results:
-        if x in achieved and results[x] > achieved[x]:
-                results[x] = achieved[x]
-    if results != achieved:
-        with open('data.py', 'a') as f:
-            f.write(dumps(results) + '\n')
-        with open('limit.py', 'w') as f:
-            f.write("achieved = " + dumps(results))
-            print("Updated!")
+    with open('data.py', 'a') as f:
+        f.write(dumps(results, sort_keys=True) + '\n')
+    print("Updated!")
