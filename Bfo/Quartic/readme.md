@@ -1,6 +1,6 @@
-**SPHERE**
+**QUARTIC**
 
-Fitness Function - SPHERE
+Fitness Function - QUARTIC
 
 *Information about files:*
 
