@@ -34,9 +34,9 @@ rand_vect = [0]*dimension  # direction of movement after a tumble
 delta = [0]*dimension      # used in the normalization of the rand_vect
 
 # chaotic initializations
-c_space = 0.3   # chaotic init for space
 c_prob = 0.8   # chaotic init for probability
-c_tumble = 0.5  # chaotic init for tumbling
+c_space = 0.3   # chaotic init for space
+c_tumble = 0.5   # chaotic init for tumbling
 
 
 def matyas(x, fe_count, best):
