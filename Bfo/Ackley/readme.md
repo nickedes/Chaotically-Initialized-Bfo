@@ -1,6 +1,6 @@
-**SPHERE**
+**ACKLEY**
 
-Fitness Function - SPHERE
+Fitness Function - ACKLEY
 
 *Information about files:*
 

@@ -1,6 +1,6 @@
-**SPHERE**
+**MATYAS**
 
-Fitness Function - SPHERE
+Fitness Function - MATYAS
 
 *Information about files:*
 
