@@ -2,12 +2,24 @@ from init import *
 from optimization import *
 from json import dumps
 
-num = 9  # number of fitness functions
+num = 10  # number of fitness functions
 
 if __name__ == '__main__':
     print("Bacterial Foraging Optimization Algorithm")
     print("Dimension: ", dimension)
     # For tracking global minima. ;)
+    func_dict = {
+        1: "sphere",
+        2: "rastrigin",
+        3: "rosenbrock",
+        4: "schwefel",
+        5: "quartic",
+        6: "ackley",
+        7: "schaffer",
+        8: "griewank",
+        9: "matyas",
+        10: "trid"
+    }
     results = {}
     for i in range(num):
         best = INF                 # the best solution found during the search
