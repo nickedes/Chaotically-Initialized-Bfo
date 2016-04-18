@@ -32,9 +32,9 @@ if __name__ == '__main__':
         # minimization of objective function
         best = optimization(i+1, population, space, fe_count, best)
         if best == 0.0:
-            results[str(i+1)] = 1.0
+            results[func_dict[i+1]] = 1.0
         else:
-            results[str(i+1)] = best
+            results[func_dict[i+1]] = best
 
     with open('data.py', 'a') as f:
         f.write(dumps(results, sort_keys=True) + '\n')

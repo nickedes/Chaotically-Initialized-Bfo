@@ -174,10 +174,12 @@ def objective_function(num, x, fe_count, best):
     elif num == 6:
         return ackley(x, fe_count, best)
     elif num == 7:
-        return f5(x, fe_count, best)
+        return schaffer(x, fe_count, best)
     elif num == 8:
         return griewank(x, fe_count, best)
     elif num == 9:
         return matyas(x, fe_count, best)
+    elif num == 10:
+        return trid(x, fe_count, best)
     else:
         pass
