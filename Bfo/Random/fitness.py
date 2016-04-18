@@ -115,11 +115,18 @@ def ackley(x, fe_count, best):
     return x, fe_count, best
 
 
-def f5(x, fe_count, best):
-    result = 0.0
+def Schaffer(x, fe_count, best):
+    """
+    https://en.wikipedia.org/wiki/Test_functions_for_optimization
+    Name - Schaffer function N. 2
+    """
+    sum_sq = 0.0
+    fe_count = fe_count + 1
     for i in range(len(x.vect)):
-        result += abs(x.vect[i]) - 10*cos(sqrt(abs(10*x.vect[i])))
-    x.cost = result
+        sum_sq += pow(x.vect[i], 2.0)
+
+    x.cost = 0.5 + (pow(sin(sum_sq), 2.0) - 0.5)/pow((1 + 0.001*sum_sq), 2.0)
+
     if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = abs(x.cost)
     return x, fe_count, best
@@ -154,6 +161,25 @@ def matyas(x, fe_count, best):
 
     if abs(x.cost) < abs(best) and x.cost != 0.0:
         best = x.cost
+    return x, fe_count, best
+
+
+def trid(x, fe_count, best):
+    """
+    http://www.sfu.ca/~ssurjano/trid.html
+    """
+    sum_sq = 0.0
+    fe_count = fe_count + 1
+    for i in range(len(x.vect)):
+        sum_sq += pow(x.vect[i] - 1, 2.0)
+
+    sum_consecutive = 0.0
+    for i in range(len(x.vect)-1):
+        sum_consecutive += x.vect[i]*x.vect[i+1]
+    x.cost = sum_sq - sum_consecutive
+
+    if abs(x.cost) < abs(best) and x.cost != 0.0:
+        best = abs(x.cost)
     return x, fe_count, best
 
 
