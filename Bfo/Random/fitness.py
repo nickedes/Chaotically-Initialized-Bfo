@@ -115,7 +115,7 @@ def ackley(x, fe_count, best):
     return x, fe_count, best
 
 
-def Schaffer(x, fe_count, best):
+def schaffer(x, fe_count, best):
     """
     https://en.wikipedia.org/wiki/Test_functions_for_optimization
     Name - Schaffer function N. 2
