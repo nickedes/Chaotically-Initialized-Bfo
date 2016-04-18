@@ -34,7 +34,7 @@ def elimination_dispersal(num, population, c_space, fe_count, best, c_prob):
             for j in range(dimension):
                 c_space = map_func(num, c_space, i+j+1)
                 population[i].vect[j] = c_space
-            population[i], fe_count, best = sphere(
+            population[i], fe_count, best = Trid(
                 population[i], fe_count, best)
 
     return population, c_space, fe_count, best, c_prob
@@ -99,7 +99,7 @@ def chemotaxis(num, population, fe_count, best, c_tumble):
         # tumble i bactu nd save new cell
         new_cell, c_tumble = tumble_step(
             num, new_cell, population[i], c_tumble)
-        new_cell, fe_count, best = sphere(new_cell, fe_count, best)
+        new_cell, fe_count, best = Trid(new_cell, fe_count, best)
         new_cell = interaction(new_cell)
         for j in range(dimension):
             population[i].vect[j] = new_cell.vect[j]
@@ -112,7 +112,7 @@ def chemotaxis(num, population, fe_count, best, c_tumble):
                 Jlast = new_cell.fitness
                 new_cell = swim_step(new_cell, population[i])
 
-                new_cell, fe_count, best = sphere(new_cell, fe_count, best)
+                new_cell, fe_count, best = Trid(new_cell, fe_count, best)
                 new_cell = interaction(new_cell)
 
                 # copy

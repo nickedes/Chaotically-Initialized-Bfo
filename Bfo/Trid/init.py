@@ -78,7 +78,7 @@ def initialize_population(num, population, c_space, fe_count, best):
             c_space = map_func(num, c_space, i+j+1)
             population[i].vect[j] = c_space
         # TODO : implent fitness function
-        population[i], fe_count, best = sphere(population[i], fe_count, best)
+        population[i], fe_count, best = Trid(population[i], fe_count, best)
         population[i].fitness = 0.0
         population[i].health = 0.0
         population[i].step_size = ss
