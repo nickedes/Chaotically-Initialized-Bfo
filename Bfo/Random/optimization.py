@@ -29,7 +29,9 @@ def elimination_dispersal(num, population, space, fe_count, best):
     """
     for i in range(S):
         # simply disperse bacterium to a random location on the search space
-        if random_val(0.0, 1.0) < p_ed:
+        # c_prob = 0.2
+        c_prob = random_val(0.0, 1.0)
+        if c_prob < p_ed:
             for j in range(dimension):
                 population[i].vect[j] = random_val(space[j][0], space[j][1])
             population[i], fe_count, best = objective_function(
@@ -56,7 +58,9 @@ def interaction(x):
 def tumble_step(new_cell, current_cell):
     a, b, temp1, temp2 = -1.0, 1.0, 0.0, 0.0
     for i in range(dimension):
-        delta[i] = random_val(a, b)
+        # c_tumble = 0.1
+        c_tumble = random_val(a, b)
+        delta[i] = c_tumble
         temp1 += pow(delta[i], 2.0)
 
     temp2 = sqrt(temp1)

@@ -71,7 +71,9 @@ def initialize_population(num, population, space, fe_count, best):
     for i in range(S):
         # randomly distribute the initial population
         for j in range(dimension):
-            population[i].vect[j] = random_val(space[j][0], space[j][1])
+            c_space = 0.1
+            # c_space = random_val(space[j][0], space[j][1])
+            population[i].vect[j] = c_space
         # TODO : implent fitness function
         population[i], fe_count, best = objective_function(
             num, population[i], fe_count, best)
