@@ -26,6 +26,9 @@ if __name__ == '__main__':
         else:
             results[str(i+1)] = best
 
-    with open('data.py', 'a') as f:
-        f.write(dumps(results, sort_keys=True) + '\n')
+    # with open('data.py', 'a') as f:
+    #     f.write(dumps(results, sort_keys=True) + '\n')
+
+    with open('data_graphs.py', 'a') as f:
+        f.write(dumps(res, sort_keys=True) + '\n')
     print("Updated!")
