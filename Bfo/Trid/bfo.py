@@ -9,6 +9,7 @@ if __name__ == '__main__':
     print("Dimension: ", dimension)
     # For tracking global minima. ;)
     results = {'c_space': c_space, 'c_prob': c_prob, 'c_tumble': c_tumble}
+    res = {}
     for i in range(num):
         best = INF                 # the best solution found during the search
         fe_count = 0               # number of objective function evaluations
@@ -26,6 +27,9 @@ if __name__ == '__main__':
         else:
             results[str(i+1)] = best
 
-    with open('data.py', 'a') as f:
-        f.write(dumps(results, sort_keys=True) + '\n')
+    # with open('data.py', 'a') as f:
+    #     f.write(dumps(results, sort_keys=True) + '\n')
+
+    with open('data_graphs.py', 'a') as f:
+        f.write(dumps(res, sort_keys=True) + '\n')
     print("Updated!")
