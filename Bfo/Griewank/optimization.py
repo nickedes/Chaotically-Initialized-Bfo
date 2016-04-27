@@ -128,8 +128,8 @@ def chemotaxis(num, population, fe_count, best, c_tumble):
 
 
 def optimization(num, population, c_space, fe_count, best, c_prob, c_tumble):
+    iteration_values = []
     for l in range(N_ed):
-
         for k in range(N_re):
 
             for j in range(N_ch):
@@ -141,7 +141,9 @@ def optimization(num, population, c_space, fe_count, best, c_prob, c_tumble):
         print("best = ", best, " fe_count = ", fe_count)
         population, c_space, fe_count, best, c_prob = elimination_dispersal(
             num, population, c_space, fe_count, best, c_prob)
+        if l % 2 == 1:
+            iteration_values.append([best, (l+1)*N_re*N_ch])
 
     print("best found value: ", best, " number of function evaluations: ",
           fe_count, " For Chaotic map ", num)
-    return best
+    return best, iteration_values
