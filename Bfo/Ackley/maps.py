@@ -91,3 +91,14 @@ def map_func(num, x, iteration_num):
         return sinusoidal(x)
     elif num == 10:
         return chebyshev(x, iteration_num)
+
+1:"logistic(x)"
+2:"gauss(x)"
+3:"piecewise(x)"
+4:"singer(x)"
+5:"tent(x)"
+6:"iterative(x)"
+7:"sine(x)"
+8:"circle(x)"
+9:"sinusoidal(x)"
+10:"chebyshev(x, iteration_num)"
